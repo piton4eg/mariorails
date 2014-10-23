@@ -9,6 +9,12 @@ ContactManager.module "ContactsApp.List", (List, ContactManager, Backbone, Mario
     tagName: "tr"
     template: contactTemplate
 
+    events:
+      "click": "highlightName"
+
+    highlightName: ->
+      @$el.toggleClass "warning"
+
   List.Contacts = Marionette.CompositeView.extend
     tagName: "table"
     className: "table table-hover"
