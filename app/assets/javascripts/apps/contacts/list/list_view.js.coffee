@@ -17,7 +17,10 @@ ContactManager.module "ContactsApp.List", (List, ContactManager, Backbone, Mario
       <td><%- firstName %></td>
       <td><%- lastName %></td>
       <td>
-        <button class=\"btn btn-small js-delete\">
+        <a href='#' class='btn btn-small btn-primary js-show' role='button'>
+          Show
+        </a>
+        <button class='btn btn-small js-delete'>
           Delete
         </button>
       </td>
@@ -29,10 +32,16 @@ ContactManager.module "ContactsApp.List", (List, ContactManager, Backbone, Mario
 
     events:
       "click": "highlightName"
+      "click td a.js-show": "showClicked"
       "click button.js-delete": "deleteClicked"
 
     highlightName: ->
       @$el.toggleClass "warning"
+
+    showClicked: (e) ->
+      e.preventDefault()
+      e.stopPropagation()
+      @trigger("contact:show", @model)
 
     deleteClicked: (e) ->
       e.stopPropagation()

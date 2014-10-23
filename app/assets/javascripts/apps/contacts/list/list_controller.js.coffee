@@ -12,5 +12,8 @@ ContactManager.module "ContactsApp.List", (List, ContactManager, Backbone, Mario
       contactsListView.on "childview:contact:delete", (childView, model) ->
         contacts.remove(model)
 
+      contactsListView.on "childview:contact:show", (childView, model) ->
+        console.log "Show model " + model
+
       ContactManager.mainRegion.show(contactsListView)
 
