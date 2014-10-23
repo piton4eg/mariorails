@@ -12,4 +12,4 @@
 #= require_tree ./routers
 
 $ ->
-  Mariorails.start()
+  ContactManager.start()
