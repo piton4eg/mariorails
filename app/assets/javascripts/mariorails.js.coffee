@@ -1,20 +1,10 @@
 window.ContactManager = new Marionette.Application()
 
-contactItemTemplate =
-  _.template("<h2><%- firstName %> <%- lastName %></h2>")
-
 ContactManager.addRegions
   mainRegion: '#main-region'
 
-ContactManager.Contact = Backbone.Model.extend
-  defaults:
-    phoneNumber: "No phone number"
-
-ContactManager.ContactCollection = Backbone.Collection.extend
-  model: ContactManager.Contact
-  # sort
-  comparator: (contact) ->
-    contact.get('firstName') + ' ' + contact.get('lastName')
+contactItemTemplate =
+  _.template("<h2><%- firstName %> <%- lastName %></h2>")
 
 ContactManager.ContactItemView = Marionette.ItemView.extend
   tagName: "li"
@@ -27,28 +17,7 @@ ContactManager.ContactsView = Marionette.CollectionView.extend
 
 # "initialize:after" renamed to "start"
 ContactManager.on "start", ->
-  contacts = new ContactManager.ContactCollection([
-    {
-      firstName: "Bob"
-      lastName: "Brigham"
-      phoneNumber: "555-0163"
-    }
-    {
-      firstName: "Alice"
-      lastName: "Tampen"
-      phoneNumber: "555-0163"
-    }
-    {
-      firstName: "Charlie"
-      lastName: "Campbell"
-      phoneNumber: "555-0163"
-    }
-    {
-      firstName: "Alice"
-      lastName: "Arten"
-      phoneNumber: "555-0163"
-    }
-  ])
+  contacts = ContactManager.request("contact:entities")
 
   contactsListView = new ContactManager.ContactsView
     collection: contacts
