@@ -1,14 +1,18 @@
 ContactManager.module "ContactsApp.List", (List, ContactManager, Backbone, Marionette, $, _) ->
 
+  contactListTemplate =
+    _.template("<thead><tr><th>First Name</th><th>Last Name</th></tr></thead><tbody></tbody>")
   contactTemplate =
-    _.template("<h2><%- firstName %> <%- lastName %></h2>")
+    _.template("<td><%- firstName %></td><td><%- lastName %></td>")
 
   List.Contact = Marionette.ItemView.extend
-    tagName: "li"
+    tagName: "tr"
     template: contactTemplate
 
-  List.Contacts = Marionette.CollectionView.extend
-    tagName: "ul"
+  List.Contacts = Marionette.CompositeView.extend
+    tagName: "table"
+    className: "table table-hover"
+    template: contactListTemplate
     # "itemView" renamed to "childView"
     childView: List.Contact
-
+    childViewContainer: "tbody"
