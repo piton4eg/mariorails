@@ -3,14 +3,21 @@ window.ContactManager = new Marionette.Application()
 ContactManager.addRegions
   mainRegion: '#main-region'
 
-staticTemplate = _.template("<p>Template</p>")
-otherTemplate = _.template("<h2>Other template</h2>")
+contactTemplate =
+  _.template("<h2><%- firstName %> <%- lastName %></h2>")
 
-ContactManager.StaticView = Marionette.ItemView.extend
-  template: staticTemplate
+ContactManager.Contact = Backbone.Model.extend({})
+
+ContactManager.ContactView = Marionette.ItemView.extend
+  template: contactTemplate
 
 ContactManager.on "start", ->
-  staticView = new ContactManager.StaticView
-    template: otherTemplate
-    id: 'template-id'
-  ContactManager.mainRegion.show(staticView)
+  alice = new ContactManager.Contact
+    firstName:    "Alice"
+    lastName:     "Arten"
+    phoneNumber:  "555-55-55"
+
+  aliceView = new ContactManager.ContactView
+    model: alice
+
+  ContactManager.mainRegion.show(aliceView)
