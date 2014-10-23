@@ -1,9 +1,3 @@
-window.Mariorails =
-  Models: {}
-  Collections: {}
-  Views: {}
-  Routers: {}
-  initialize: -> alert 'Hello from Backbone!'
-
-$(document).ready ->
-  Mariorails.initialize()
+window.Mariorails = new Marionette.Application()
+Mariorails.on "start", ->
+  console.log "Start application"
