@@ -10,6 +10,13 @@ ContactManager.Contact = Backbone.Model.extend({})
 
 ContactManager.ContactView = Marionette.ItemView.extend
   template: contactTemplate
+  id: 'contact'
+
+  events:
+    "click h2": "alertPhone"
+
+  alertPhone: ->
+    alert(@model.escape("phoneNumber"))
 
 ContactManager.on "start", ->
   alice = new ContactManager.Contact
