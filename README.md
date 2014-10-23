@@ -1,0 +1,1 @@
+Project with testing Backbone.Marionette with examples from book [Backbone.Marionette.js: A Gentle Introduction](https://leanpub.com/marionette-gentle-introduction). Some examples are different and javascript changed to coffee
