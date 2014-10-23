@@ -6,7 +6,9 @@ ContactManager.addRegions
 contactTemplate =
   _.template("<h2><%- firstName %> <%- lastName %></h2>")
 
-ContactManager.Contact = Backbone.Model.extend({})
+ContactManager.Contact = Backbone.Model.extend
+  defaults:
+    phoneNumber: "No phone number"
 
 ContactManager.ContactView = Marionette.ItemView.extend
   template: contactTemplate
@@ -22,7 +24,7 @@ ContactManager.on "start", ->
   alice = new ContactManager.Contact
     firstName:    "Alice"
     lastName:     "Arten"
-    phoneNumber:  "555-55-55"
+    # phoneNumber:  "555-55-55"
 
   aliceView = new ContactManager.ContactView
     model: alice
