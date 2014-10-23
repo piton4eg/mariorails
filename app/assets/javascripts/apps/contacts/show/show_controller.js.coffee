@@ -1,7 +1,9 @@
 ContactManager.module "ContactsApp.Show", (Show, ContactManager, Backbone, Marionette, $, _) ->
 
   Show.Controller =
-    showContact: (model) ->
+    showContact: (id) ->
+      contacts = ContactManager.request("contact:entities")
+      model = contacts.get(id)
       contactView = new Show.Contact
         model: model
 

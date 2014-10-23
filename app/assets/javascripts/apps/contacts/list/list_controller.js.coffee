@@ -13,7 +13,7 @@ ContactManager.module "ContactsApp.List", (List, ContactManager, Backbone, Mario
         contacts.remove(model)
 
       contactsListView.on "childview:contact:show", (childView, model) ->
-        ContactManager.ContactsApp.Show.Controller.showContact(model)
+        ContactManager.trigger("contact:show", model.get("id"))
 
       ContactManager.mainRegion.show(contactsListView)
 

@@ -17,7 +17,7 @@ ContactManager.module "ContactsApp.List", (List, ContactManager, Backbone, Mario
       <td><%- firstName %></td>
       <td><%- lastName %></td>
       <td>
-        <a href='#' class='btn btn-small btn-primary js-show' role='button'>
+        <a href='#contacts/<%- id %>' class='btn btn-small btn-primary js-show' role='button'>
           Show
         </a>
         <button class='btn btn-small js-delete'>
