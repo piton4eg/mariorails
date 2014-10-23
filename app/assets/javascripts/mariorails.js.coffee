@@ -1,32 +1,49 @@
 window.ContactManager = new Marionette.Application()
 
+contactItemTemplate =
+  _.template("<h2><%- firstName %> <%- lastName %></h2>")
+
 ContactManager.addRegions
   mainRegion: '#main-region'
-
-contactTemplate =
-  _.template("<h2><%- firstName %> <%- lastName %></h2>")
 
 ContactManager.Contact = Backbone.Model.extend
   defaults:
     phoneNumber: "No phone number"
 
-ContactManager.ContactView = Marionette.ItemView.extend
-  template: contactTemplate
-  id: 'contact'
+ContactManager.ContactCollection = Backbone.Collection.extend
+  model: ContactManager.Contact
 
-  events:
-    "click h2": "alertPhone"
+ContactManager.ContactItemView = Marionette.ItemView.extend
+  tagName: "li"
+  template: contactItemTemplate
 
-  alertPhone: ->
-    alert(@model.escape("phoneNumber"))
+ContactManager.ContactsView = Marionette.CollectionView.extend
+  tagName: "ul"
+  # "itemView" renamed to "childView"
+  childView: ContactManager.ContactItemView
 
+# "initialize:after" renamed to "start"
 ContactManager.on "start", ->
-  alice = new ContactManager.Contact
-    firstName:    "Alice"
-    lastName:     "Arten"
-    # phoneNumber:  "555-55-55"
+  contacts = new ContactManager.ContactCollection([
+    {
+      firstName: "Bob"
+      lastName: "Brigham"
+      phoneNumber: "555-0163"
+    }
+    {
+      firstName: "Charlie"
+      lastName: "Campbell"
+      phoneNumber: "555-0163"
+    }
+    {
+      firstName: "Alice"
+      lastName: "Arten"
+      phoneNumber: "555-0163"
+    }
+  ])
 
-  aliceView = new ContactManager.ContactView
-    model: alice
+  contactsListView = new ContactManager.ContactsView
+    collection: contacts
 
-  ContactManager.mainRegion.show(aliceView)
+  ContactManager.mainRegion.show(contactsListView)
+
