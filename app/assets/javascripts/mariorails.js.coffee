@@ -12,6 +12,9 @@ ContactManager.Contact = Backbone.Model.extend
 
 ContactManager.ContactCollection = Backbone.Collection.extend
   model: ContactManager.Contact
+  # sort
+  comparator: (contact) ->
+    contact.get('firstName') + ' ' + contact.get('lastName')
 
 ContactManager.ContactItemView = Marionette.ItemView.extend
   tagName: "li"
@@ -28,6 +31,11 @@ ContactManager.on "start", ->
     {
       firstName: "Bob"
       lastName: "Brigham"
+      phoneNumber: "555-0163"
+    }
+    {
+      firstName: "Alice"
+      lastName: "Tampen"
       phoneNumber: "555-0163"
     }
     {
